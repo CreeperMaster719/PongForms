@@ -20,6 +20,8 @@ namespace eliotPong
         public int ySpeed;
         public int width;
         public int height;
+        public Rectangle HitBox;
+
 
 
         Brush color;
@@ -32,18 +34,19 @@ namespace eliotPong
             this.xSpeed = xSpeed;
             this.ySpeed = ySpeed;
             this.color = color;
+            HitBox = new Rectangle(x, y, w, h);
         }
         public void Move()
         {
-            x += xSpeed;
-            y += ySpeed;
+            HitBox.X += xSpeed;
+            HitBox.Y += ySpeed;
         }
 
 
 
         public void Draw(Graphics gfx)
         {
-            gfx.FillEllipse(color, x, y, width, height);
+            gfx.FillEllipse(color, HitBox);
            
         }        
     }

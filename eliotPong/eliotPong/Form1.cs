@@ -20,12 +20,14 @@ namespace eliotPong
         Graphics gfx;
         bouncyball pongBall;
         bouncePaddles paddleLeft;
+        bouncePaddles paddleRight;
         int x = 200;
         int pX;
         int pY;
         int pW;
         int pH;
-        int paddleSpeed = 10;
+        int LpaddleSpeed = 10;
+        int RpaddleSpeed = 10;
 
 
         int y = 200;
@@ -38,7 +40,8 @@ namespace eliotPong
             gfx = Graphics.FromImage(bitmap);
 
             pongBall = new bouncyball(Brushes.Black, 40, 40, 40, 40, 4, 5);
-            paddleLeft = new bouncePaddles(Brushes.Black, 50, 400, 20, 120, paddleSpeed);
+            paddleLeft = new bouncePaddles(Brushes.Black, 50, 400, 20, 120, LpaddleSpeed);
+            paddleRight = new bouncePaddles(Brushes.Blue, ClientSize.Width - 100, 400, 20, 120, RpaddleSpeed);
         }
 
         private void animeTimer_Tick(object sender, EventArgs e)
@@ -46,46 +49,49 @@ namespace eliotPong
             gfx.Clear(BackColor);
             pongBall.Move();
 
-            if (pongBall.x + pongBall.width >= ClientSize.Width)
+            if (pongBall.HitBox.X + pongBall.HitBox.Width >= ClientSize.Width)
             {
                 pongBall.xSpeed *= -1;
             }
-            if (pongBall.y + pongBall.height >= ClientSize.Height)
+            if (pongBall.HitBox.Y + pongBall.HitBox.Height >= ClientSize.Height)
             {
                 pongBall.ySpeed *= -1;
             }
-            if (pongBall.x <= 0)
+            if (pongBall.HitBox.X <= 0)
             {
                 pongBall.xSpeed *= -1;
             }
-            if (pongBall.y <= 0)
+            if (pongBall.HitBox.Y <= 0)
             {
                 pongBall.ySpeed *= -1;
             }
             if (paddleLeft.movingUp)
             {
-                if (paddleLeft.Y > 0)
+                if (paddleLeft.HitBox.Y > 0)
                 {
-                    paddleLeft.Y -= paddleSpeed;
+                    paddleLeft.HitBox.Y -= paddleLeft.paddleSpeed;
                 }
             }
             else if (paddleLeft.movingDown)
             {
-                if(paddleLeft.Y + paddleLeft.H <= ClientSize.Height)
+                if(paddleLeft.HitBox.Y + paddleLeft.HitBox.Height <= ClientSize.Height)
                     {
-                    paddleLeft.Y += paddleSpeed;
-                }
-            }
-            if (pongBall.y < paddleLeft.Y + paddleLeft.H && pongBall.y > paddleLeft.Y)
-            {
-                if (pongBall.x <= paddleLeft.X + paddleLeft.W)
-                {
-                    pongBall.xSpeed *= -1;
+                    paddleLeft.HitBox.Y += paddleLeft.paddleSpeed;
                 }
             }
 
+
+
+
+            paddleLeft.PosCheck(ClientSize);
+            paddleRight.PosCheck(ClientSize);
+           
+            paddleRight.HitBox.Y += paddleRight.paddleSpeed;
+
+
             pongBall.Draw(gfx);
             paddleLeft.Draw(gfx);
+            paddleRight.Draw(gfx);
             pictureBox1.Image = bitmap;
 
         }
@@ -100,6 +106,7 @@ namespace eliotPong
             {
                 paddleLeft.movingDown = true;
             }
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -112,6 +119,12 @@ namespace eliotPong
             {
                 paddleLeft.movingDown = false;
             }
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
