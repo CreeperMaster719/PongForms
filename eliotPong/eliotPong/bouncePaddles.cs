@@ -18,9 +18,17 @@ namespace eliotPong
         public int Speed;
         Brush color;
         public bool movingUp = false;
-        public bool movingDown = false;
-        public Rectangle HitBox;
+        public bool movingDown = false;        
+
+        public Rectangle HitBox
+        {
+            get
+            {
+                return new Rectangle(X, Y, W, H);
+            }
+        }
        public int paddleSpeed = 10;
+        public int paddleSpeed2 = 5;
 
         public bouncePaddles(Brush color, int X, int Y, int W, int H, int Speed)
         {
@@ -30,17 +38,20 @@ namespace eliotPong
             this.H = H;
             this.Speed = Speed;
             this.color = color;
-            HitBox = new Rectangle(X, Y, W, H);
         }
-       public void PosCheck(Size ClientSize)
+        public void PosCheck(Size ClientSize)
         {
-            if (HitBox.Y <= ClientSize.Height + 60)
+            Y += Speed;
+
+            if (Y + H >= ClientSize.Height)
             {
-                paddleSpeed *= -1;
+                // this goes negative.
+                Speed *= -1;
             }
-            else if (HitBox.Y + HitBox.Height >= 0)
+            else if (Y < 0)
             {
-                paddleSpeed *= -1;
+                //this goes positive.
+                Speed *= -1;
             }
         }
         public void Draw(Graphics gfx)

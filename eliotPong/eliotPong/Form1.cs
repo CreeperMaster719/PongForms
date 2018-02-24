@@ -21,33 +21,33 @@ namespace eliotPong
         bouncyball pongBall;
         bouncePaddles paddleLeft;
         bouncePaddles paddleRight;
+        Random paddleMovement;
+        
         int x = 200;
-        int pX;
-        int pY;
-        int pW;
-        int pH;
         int LpaddleSpeed = 10;
         int RpaddleSpeed = 10;
-
-
         int y = 200;
-
         int w;
         int h;
+        int paddleMotion;
         private void Form1_Load(object sender, EventArgs e)
         {
             bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             gfx = Graphics.FromImage(bitmap);
 
-            pongBall = new bouncyball(Brushes.Black, 40, 40, 40, 40, 4, 5);
-            paddleLeft = new bouncePaddles(Brushes.Black, 50, 400, 20, 120, LpaddleSpeed);
-            paddleRight = new bouncePaddles(Brushes.Blue, ClientSize.Width - 100, 400, 20, 120, RpaddleSpeed);
+            pongBall = new bouncyball(Brushes.DarkGoldenrod, 40, 40, 40, 40, 4, 5);
+            paddleLeft = new bouncePaddles(Brushes.Red, 50, 400, 20, 120, LpaddleSpeed);
+            paddleRight = new bouncePaddles(Brushes.Beige, ClientSize.Width - 100, 400, 20, 120, RpaddleSpeed);
+            paddleMovement = new Random();
+            
         }
 
         private void animeTimer_Tick(object sender, EventArgs e)
         {
             gfx.Clear(BackColor);
+            gfx.DrawImage(Properties.Resources.p0Ng, 0, 0, pictureBox1.Width, pictureBox1.Height);
             pongBall.Move();
+           
 
             if (pongBall.HitBox.X + pongBall.HitBox.Width >= ClientSize.Width)
             {
@@ -67,26 +67,44 @@ namespace eliotPong
             }
             if (paddleLeft.movingUp)
             {
-                if (paddleLeft.HitBox.Y > 0)
+                if (paddleLeft.Y > 0)
                 {
-                    paddleLeft.HitBox.Y -= paddleLeft.paddleSpeed;
+                    paddleLeft.Y -= paddleLeft.paddleSpeed;
                 }
             }
             else if (paddleLeft.movingDown)
             {
-                if(paddleLeft.HitBox.Y + paddleLeft.HitBox.Height <= ClientSize.Height)
+                if(paddleLeft.Y + paddleLeft.H <= ClientSize.Height)
                     {
-                    paddleLeft.HitBox.Y += paddleLeft.paddleSpeed;
+                    paddleLeft.Y += paddleLeft.paddleSpeed;
                 }
             }
 
-
-
-
-            paddleLeft.PosCheck(ClientSize);
-            paddleRight.PosCheck(ClientSize);
+            if(pongBall.HitBox.IntersectsWith(paddleLeft.HitBox))
+            {
+                pongBall.xSpeed *= -1;
+            }
+            if (pongBall.HitBox.IntersectsWith(paddleRight.HitBox))
+            {
+                pongBall.xSpeed *= -1;
+            }
+            
+            if (paddleRight.Y + paddleRight.H >= ClientSize.Height)
+            {
+                // this goes negative.
+                paddleRight.paddleSpeed2 *= -1;
+            }
+            else if (paddleRight.Y < 0)
+            {
+                //this goes positive.
+                paddleRight.paddleSpeed2 *= -1;
+            }
+                paddleRight.Y = pongBall.y;
            
-            paddleRight.HitBox.Y += paddleRight.paddleSpeed;
+            // paddleRight.PosCheck(ClientSize);
+            paddleRight.Y += paddleRight.paddleSpeed2 + paddleMotion;
+            
+            //paddleRight.HitBox.Y += paddleRight.paddleSpeed;
 
 
             pongBall.Draw(gfx);
@@ -101,10 +119,12 @@ namespace eliotPong
             if (e.KeyCode == Keys.W)
             {
                 paddleLeft.movingUp = true;
+                paddleLeft.movingDown = false;
             }
             else if (e.KeyCode == Keys.S)
             {
                 paddleLeft.movingDown = true;
+                paddleLeft.movingUp = false;
             }
 
         }
@@ -125,6 +145,12 @@ namespace eliotPong
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AITimer_Tick(object sender, EventArgs e)
+        {
+            paddleMotion = paddleMovement.Next(0, 400) - 200;
+            
         }
     }
 }

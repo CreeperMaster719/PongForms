@@ -20,7 +20,15 @@ namespace eliotPong
         public int ySpeed;
         public int width;
         public int height;
-        public Rectangle HitBox;
+        public Rectangle HitBox
+        {
+            get
+            {
+                 return new Rectangle(x, y, width, height);
+            }
+        }
+
+
 
 
 
@@ -34,12 +42,12 @@ namespace eliotPong
             this.xSpeed = xSpeed;
             this.ySpeed = ySpeed;
             this.color = color;
-            HitBox = new Rectangle(x, y, w, h);
+            
         }
         public void Move()
         {
-            HitBox.X += xSpeed;
-            HitBox.Y += ySpeed;
+            x += xSpeed;
+            y += ySpeed;
         }
 
 
