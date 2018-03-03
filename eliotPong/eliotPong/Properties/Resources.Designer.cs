@@ -61,6 +61,15 @@ namespace eliotPong.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream lose_earrape {
+            get {
+                return ResourceManager.GetStream("lose_earrape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap p0Ng {
@@ -81,6 +90,34 @@ namespace eliotPong.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream pong_hit1 {
+            get {
+                return ResourceManager.GetStream("pong_hit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pong_lose {
+            get {
+                object obj = ResourceManager.GetObject("pong_lose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream pong_miss {
+            get {
+                return ResourceManager.GetStream("pong_miss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap pong_wallpaper {
@@ -93,20 +130,19 @@ namespace eliotPong.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pong_wallpaper_try_2 {
+        internal static System.Drawing.Bitmap pong_win {
             get {
-                object obj = ResourceManager.GetObject("pong wallpaper try 2", resourceCulture);
+                object obj = ResourceManager.GetObject("pong_win", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.Drawing.Bitmap pong_wallpaper_try_3 {
+        internal static System.IO.UnmanagedMemoryStream win_earrape {
             get {
-                object obj = ResourceManager.GetObject("pong wallpaper try 3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetStream("win_earrape", resourceCulture);
             }
         }
     }

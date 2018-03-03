@@ -94,5 +94,23 @@
   <ItemGroup>
     <None Include="Resources\p0Ng.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pong hit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pong miss.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win earrape.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lose earrape.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pong_lose.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pong_win.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
